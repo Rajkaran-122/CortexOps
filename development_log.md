@@ -2,3 +2,4 @@
 
 - [2025-11-01T10:35:00.000Z] Add unit tests for market data tools
 - [2025-11-01T18:14:00.000Z] Improve error handling for API timeouts
+- [2025-11-02T14:42:00.000Z] Update prompt templates for financial analysis
