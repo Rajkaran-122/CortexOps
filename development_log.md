@@ -7,3 +7,4 @@
 - [2025-11-02T19:56:00.000Z] Update prompt templates for financial analysis
 - [2025-11-03T13:17:00.000Z] Add support for Anthropic Claude models
 - [2025-11-03T12:27:00.000Z] Fix UI flickering in terminal display
+- [2025-11-03T21:56:00.000Z] Update dependencies for security fixes
