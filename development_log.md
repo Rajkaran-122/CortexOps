@@ -5,3 +5,4 @@
 - [2025-11-02T14:42:00.000Z] Update prompt templates for financial analysis
 - [2025-11-02T17:39:00.000Z] Update filing reader for 10-K parsing
 - [2025-11-02T19:56:00.000Z] Update prompt templates for financial analysis
+- [2025-11-03T13:17:00.000Z] Add support for Anthropic Claude models
