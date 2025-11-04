@@ -8,3 +8,4 @@
 - [2025-11-03T13:17:00.000Z] Add support for Anthropic Claude models
 - [2025-11-03T12:27:00.000Z] Fix UI flickering in terminal display
 - [2025-11-03T21:56:00.000Z] Update dependencies for security fixes
+- [2025-11-04T11:17:00.000Z] Enhance financial data parsing
