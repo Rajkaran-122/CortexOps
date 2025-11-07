@@ -17,3 +17,4 @@
 - [2025-11-06T13:07:00.000Z] Refactor sentiment analysis module
 - [2025-11-06T18:38:00.000Z] Add unit tests for SEC filing parser
 - [2025-11-07T13:49:00.000Z] Improve CLI dashboard responsiveness
+- [2025-11-07T14:30:00.000Z] Add type safety for agent events
