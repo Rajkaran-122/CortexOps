@@ -21,3 +21,4 @@
 - [2025-11-07T19:10:00.000Z] Add type safety for agent events
 - [2025-11-08T20:19:00.000Z] Refactor CLI input validation
 - [2025-11-08T15:24:00.000Z] Add type safety for agent events
+- [2025-11-08T16:55:00.000Z] Improve CLI dashboard responsiveness
