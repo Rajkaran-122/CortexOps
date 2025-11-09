@@ -22,3 +22,4 @@
 - [2025-11-08T20:19:00.000Z] Refactor CLI input validation
 - [2025-11-08T15:24:00.000Z] Add type safety for agent events
 - [2025-11-08T16:55:00.000Z] Improve CLI dashboard responsiveness
+- [2025-11-09T19:35:00.000Z] Add unit tests for SEC filing parser
