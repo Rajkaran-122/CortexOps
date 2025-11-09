@@ -23,3 +23,4 @@
 - [2025-11-08T15:24:00.000Z] Add type safety for agent events
 - [2025-11-08T16:55:00.000Z] Improve CLI dashboard responsiveness
 - [2025-11-09T19:35:00.000Z] Add unit tests for SEC filing parser
+- [2025-11-09T21:43:00.000Z] Update dependencies for security fixes
