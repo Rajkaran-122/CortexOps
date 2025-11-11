@@ -31,3 +31,4 @@
 - [2025-11-10T22:10:00.000Z] Enhance financial data parsing
 - [2025-11-11T16:32:00.000Z] Improve error handling for API timeouts
 - [2025-11-11T17:30:00.000Z] Fix UI flickering in terminal display
+- [2025-11-11T20:58:00.000Z] Refactor CLI input validation
