@@ -32,3 +32,4 @@
 - [2025-11-11T16:32:00.000Z] Improve error handling for API timeouts
 - [2025-11-11T17:30:00.000Z] Fix UI flickering in terminal display
 - [2025-11-11T20:58:00.000Z] Refactor CLI input validation
+- [2025-11-11T15:56:00.000Z] Fix memory leak in tool registry
