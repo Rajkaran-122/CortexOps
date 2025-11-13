@@ -37,3 +37,4 @@
 - [2025-11-12T11:49:00.000Z] Improve CLI dashboard responsiveness
 - [2025-11-13T09:32:00.000Z] Optimize browser scraping efficiency
 - [2025-11-13T17:44:00.000Z] Fix bug in ticker search results
+- [2025-11-13T21:49:00.000Z] Fix memory leak in tool registry
