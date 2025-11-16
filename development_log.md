@@ -45,3 +45,4 @@
 - [2025-11-15T22:00:00.000Z] Update prompt templates for financial analysis
 - [2025-11-15T21:04:00.000Z] Update prompt templates for financial analysis
 - [2025-11-16T19:25:00.000Z] Fix memory leak in tool registry
+- [2025-11-16T16:22:00.000Z] Improve CLI dashboard responsiveness
