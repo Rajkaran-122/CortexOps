@@ -44,3 +44,4 @@
 - [2025-11-14T21:58:00.000Z] Enhance web search tool fallback mechanism
 - [2025-11-15T22:00:00.000Z] Update prompt templates for financial analysis
 - [2025-11-15T21:04:00.000Z] Update prompt templates for financial analysis
+- [2025-11-16T19:25:00.000Z] Fix memory leak in tool registry
