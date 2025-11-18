@@ -49,3 +49,4 @@
 - [2025-11-17T09:15:00.000Z] Fix bug in ticker search results
 - [2025-11-17T12:17:00.000Z] Refactor sentiment analysis module
 - [2025-11-18T09:56:00.000Z] Add unit tests for SEC filing parser
+- [2025-11-18T12:42:00.000Z] Fix edge case in token limit calculation
