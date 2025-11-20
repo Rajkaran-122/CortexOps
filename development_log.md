@@ -55,3 +55,4 @@
 - [2025-11-19T13:37:00.000Z] Add unit tests for SEC filing parser
 - [2025-11-19T12:31:00.000Z] Improve model selection logic
 - [2025-11-20T21:14:00.000Z] Add type safety for agent events
+- [2025-11-20T17:16:00.000Z] Add unit tests for SEC filing parser
