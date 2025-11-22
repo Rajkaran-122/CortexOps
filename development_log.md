@@ -61,3 +61,4 @@
 - [2025-11-21T21:39:00.000Z] Add type safety for agent events
 - [2025-11-21T17:44:00.000Z] Add benchmarking scripts for agent speed
 - [2025-11-22T13:53:00.000Z] Enhance web search tool fallback mechanism
+- [2025-11-22T14:32:00.000Z] Fix UI flickering in terminal display
