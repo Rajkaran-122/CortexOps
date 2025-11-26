@@ -73,3 +73,4 @@
 - [2025-11-26T12:29:00.000Z] Update prompt templates for financial analysis
 - [2025-11-26T15:09:00.000Z] Optimize browser scraping efficiency
 - [2025-11-26T11:21:00.000Z] Optimize agent scratchpad storage
+- [2025-11-26T10:31:00.000Z] Add support for Anthropic Claude models
