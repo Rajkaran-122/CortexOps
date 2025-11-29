@@ -80,3 +80,4 @@
 - [2025-11-28T14:54:00.000Z] Add support for Anthropic Claude models
 - [2025-11-29T09:14:00.000Z] Add type safety for agent events
 - [2025-11-29T13:28:00.000Z] Fix memory leak in tool registry
+- [2025-11-29T22:27:00.000Z] Enhance financial data parsing
