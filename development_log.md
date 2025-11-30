@@ -84,3 +84,4 @@
 - [2025-11-29T21:41:00.000Z] Fix UI flickering in terminal display
 - [2025-11-30T22:10:00.000Z] Update dependencies for security fixes
 - [2025-11-30T21:15:00.000Z] Optimize browser scraping efficiency
+- [2025-11-30T22:56:00.000Z] Add support for Anthropic Claude models
