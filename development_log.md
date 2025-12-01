@@ -86,3 +86,4 @@
 - [2025-11-30T21:15:00.000Z] Optimize browser scraping efficiency
 - [2025-11-30T22:56:00.000Z] Add support for Anthropic Claude models
 - [2025-11-30T19:41:00.000Z] Fix bug in ticker search results
+- [2025-12-01T19:25:00.000Z] Add unit tests for SEC filing parser
