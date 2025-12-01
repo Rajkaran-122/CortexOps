@@ -199,3 +199,4 @@
 - [2025-12-28T12:00:00.000Z] Add support for more LLM providers
 - [2025-12-19T12:00:00.000Z] Add support for Anthropic Claude models
 - [2025-12-03T12:00:00.000Z] Improve CLI dashboard responsiveness
+- [2025-12-01T12:00:00.000Z] Fix bug in ticker search results
