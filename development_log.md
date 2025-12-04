@@ -98,3 +98,4 @@
 - [2025-12-04T17:29:00.000Z] Optimize vector store embeddings
 - [2025-12-04T19:01:00.000Z] Add unit tests for SEC filing parser
 - [2025-12-04T19:50:00.000Z] Enhance financial data parsing
+- [2025-12-04T17:31:00.000Z] Refactor CLI input validation
