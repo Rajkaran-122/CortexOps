@@ -101,3 +101,4 @@
 - [2025-12-04T17:31:00.000Z] Refactor CLI input validation
 - [2025-12-05T13:32:00.000Z] Update filing reader for 10-K parsing
 - [2025-12-05T18:18:00.000Z] Update dependencies for security fixes
+- [2025-12-05T12:17:00.000Z] Update filing reader for 10-K parsing
