@@ -105,3 +105,4 @@
 - [2025-12-05T17:25:00.000Z] Improve logging for debugging tool calls
 - [2025-12-06T21:28:00.000Z] Improve model selection logic
 - [2025-12-06T09:16:00.000Z] Optimize browser scraping efficiency
+- [2025-12-06T19:45:00.000Z] Add support for Anthropic Claude models
