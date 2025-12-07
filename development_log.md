@@ -187,3 +187,4 @@
 - [2025-11-23T12:00:00.000Z] Improve model selection logic
 - [2025-12-14T12:00:00.000Z] Optimize agent reasoning loop
 - [2025-12-18T12:00:00.000Z] Update dependencies for security fixes
+- [2025-12-07T12:00:00.000Z] Improve logging for debugging tool calls
