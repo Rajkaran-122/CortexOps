@@ -106,3 +106,4 @@
 - [2025-12-06T21:28:00.000Z] Improve model selection logic
 - [2025-12-06T09:16:00.000Z] Optimize browser scraping efficiency
 - [2025-12-06T19:45:00.000Z] Add support for Anthropic Claude models
+- [2025-12-07T22:21:00.000Z] Fix UI flickering in terminal display
