@@ -114,3 +114,4 @@
 - [2025-12-08T18:09:00.000Z] Refactor scratchpad for better performance
 - [2025-12-09T22:48:00.000Z] Fix memory leak in tool registry
 - [2025-12-09T15:20:00.000Z] Improve model selection logic
+- [2025-12-09T09:12:00.000Z] Add support for more LLM providers
