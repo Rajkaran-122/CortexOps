@@ -112,3 +112,4 @@
 - [2025-12-08T20:31:00.000Z] Add support for custom system prompts
 - [2025-12-08T21:04:00.000Z] Optimize agent reasoning loop
 - [2025-12-08T18:09:00.000Z] Refactor scratchpad for better performance
+- [2025-12-09T22:48:00.000Z] Fix memory leak in tool registry
