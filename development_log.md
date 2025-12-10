@@ -119,3 +119,4 @@
 - [2025-12-10T09:40:00.000Z] Improve CLI dashboard responsiveness
 - [2025-12-10T14:23:00.000Z] Optimize agent reasoning loop
 - [2025-12-10T20:05:00.000Z] Add benchmarking scripts for agent speed
+- [2025-12-10T14:29:00.000Z] Improve logging for debugging tool calls
