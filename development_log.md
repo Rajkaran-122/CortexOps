@@ -125,3 +125,4 @@
 - [2025-12-12T19:27:00.000Z] Improve model selection logic
 - [2025-12-12T18:09:00.000Z] Add benchmarking scripts for agent speed
 - [2025-12-12T16:37:00.000Z] Fix memory leak in tool registry
+- [2025-12-12T19:28:00.000Z] Improve logging for debugging tool calls
