@@ -127,3 +127,4 @@
 - [2025-12-12T16:37:00.000Z] Fix memory leak in tool registry
 - [2025-12-12T19:28:00.000Z] Improve logging for debugging tool calls
 - [2025-12-13T13:31:00.000Z] Update prompt templates for financial analysis
+- [2025-12-13T10:51:00.000Z] Improve model selection logic
