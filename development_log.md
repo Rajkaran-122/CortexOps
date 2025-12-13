@@ -128,3 +128,4 @@
 - [2025-12-12T19:28:00.000Z] Improve logging for debugging tool calls
 - [2025-12-13T13:31:00.000Z] Update prompt templates for financial analysis
 - [2025-12-13T10:51:00.000Z] Improve model selection logic
+- [2025-12-13T14:36:00.000Z] Add support for custom system prompts
