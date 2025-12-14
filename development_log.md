@@ -130,3 +130,4 @@
 - [2025-12-13T10:51:00.000Z] Improve model selection logic
 - [2025-12-13T14:36:00.000Z] Add support for custom system prompts
 - [2025-12-13T16:09:00.000Z] Update dependencies for security fixes
+- [2025-12-14T15:41:00.000Z] Add benchmarking scripts for agent speed
