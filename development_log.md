@@ -131,3 +131,4 @@
 - [2025-12-13T14:36:00.000Z] Add support for custom system prompts
 - [2025-12-13T16:09:00.000Z] Update dependencies for security fixes
 - [2025-12-14T15:41:00.000Z] Add benchmarking scripts for agent speed
+- [2025-12-14T15:29:00.000Z] Optimize agent scratchpad storage
