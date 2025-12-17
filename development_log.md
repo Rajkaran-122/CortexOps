@@ -136,3 +136,4 @@
 - [2025-12-15T19:05:00.000Z] Optimize browser scraping efficiency
 - [2025-12-16T14:57:00.000Z] Update documentation for skill tool
 - [2025-12-16T09:12:00.000Z] Add unit tests for SEC filing parser
+- [2025-12-17T18:27:00.000Z] Add support for Anthropic Claude models
