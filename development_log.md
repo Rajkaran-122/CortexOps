@@ -138,3 +138,4 @@
 - [2025-12-16T09:12:00.000Z] Add unit tests for SEC filing parser
 - [2025-12-17T18:27:00.000Z] Add support for Anthropic Claude models
 - [2025-12-17T13:37:00.000Z] Fix UI flickering in terminal display
+- [2025-12-18T22:19:00.000Z] Improve model selection logic
