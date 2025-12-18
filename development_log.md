@@ -141,3 +141,4 @@
 - [2025-12-18T22:19:00.000Z] Improve model selection logic
 - [2025-12-18T18:36:00.000Z] Update documentation for skill tool
 - [2025-12-18T14:10:00.000Z] Add support for Anthropic Claude models
+- [2025-12-18T19:48:00.000Z] Improve CLI dashboard responsiveness
