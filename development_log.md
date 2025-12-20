@@ -146,3 +146,4 @@
 - [2025-12-19T18:48:00.000Z] Update prompt templates for financial analysis
 - [2025-12-19T18:14:00.000Z] Fix UI flickering in terminal display
 - [2025-12-20T09:59:00.000Z] Improve logging for debugging tool calls
+- [2025-12-20T21:28:00.000Z] Update filing reader for 10-K parsing
