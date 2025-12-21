@@ -148,3 +148,4 @@
 - [2025-12-20T09:59:00.000Z] Improve logging for debugging tool calls
 - [2025-12-20T21:28:00.000Z] Update filing reader for 10-K parsing
 - [2025-12-20T21:54:00.000Z] Optimize agent scratchpad storage
+- [2025-12-21T16:01:00.000Z] Add unit tests for market data tools
