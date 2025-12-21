@@ -151,3 +151,4 @@
 - [2025-12-21T16:01:00.000Z] Add unit tests for market data tools
 - [2025-12-21T14:47:00.000Z] Improve CLI dashboard responsiveness
 - [2025-12-21T15:47:00.000Z] Refactor sentiment analysis module
+- [2025-12-21T13:07:00.000Z] Fix edge case in token limit calculation
