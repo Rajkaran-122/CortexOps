@@ -158,3 +158,4 @@
 - [2025-12-22T13:16:00.000Z] Fix edge case in token limit calculation
 - [2025-12-23T10:51:00.000Z] Add unit tests for market data tools
 - [2025-12-23T17:49:00.000Z] Fix memory leak in tool registry
+- [2025-12-24T12:47:00.000Z] Add support for more LLM providers
