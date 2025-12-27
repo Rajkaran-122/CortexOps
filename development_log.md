@@ -168,3 +168,4 @@
 - [2025-12-26T22:14:00.000Z] Add unit tests for market data tools
 - [2025-12-27T18:39:00.000Z] Fix bug in ticker search results
 - [2025-12-27T14:48:00.000Z] Optimize agent reasoning loop
+- [2025-12-27T16:55:00.000Z] Improve model selection logic
