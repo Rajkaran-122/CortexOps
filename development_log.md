@@ -170,3 +170,4 @@
 - [2025-12-27T14:48:00.000Z] Optimize agent reasoning loop
 - [2025-12-27T16:55:00.000Z] Improve model selection logic
 - [2025-12-27T10:04:00.000Z] Add support for custom system prompts
+- [2025-12-28T17:38:00.000Z] Add unit tests for market data tools
