@@ -172,3 +172,4 @@
 - [2025-12-27T10:04:00.000Z] Add support for custom system prompts
 - [2025-12-28T17:38:00.000Z] Add unit tests for market data tools
 - [2025-12-28T15:24:00.000Z] Update filing reader for 10-K parsing
+- [2025-12-29T17:02:00.000Z] Enhance web search tool fallback mechanism
