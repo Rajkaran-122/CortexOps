@@ -176,3 +176,4 @@
 - [2025-12-29T12:58:00.000Z] Fix memory leak in tool registry
 - [2025-12-29T20:35:00.000Z] Fix bug in ticker search results
 - [2025-12-29T10:47:00.000Z] Enhance web search tool fallback mechanism
+- [2025-12-30T09:16:00.000Z] Add support for Anthropic Claude models
