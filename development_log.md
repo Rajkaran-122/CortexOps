@@ -179,3 +179,4 @@
 - [2025-12-30T09:16:00.000Z] Add support for Anthropic Claude models
 - [2025-12-30T12:57:00.000Z] Update documentation for skill tool
 - [2025-12-30T12:19:00.000Z] Add support for Anthropic Claude models
+- [2025-12-31T18:30:00.000Z] Update documentation for skill tool
