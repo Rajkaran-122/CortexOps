@@ -1,9 +1,9 @@
 import { Container, Spacer, Text, type TUI } from '@mariozechner/pi-tui';
-import { theme } from '../../theme.js';
-import { EvalCurrentQuestion } from './eval-current-question.js';
-import { EvalProgress } from './eval-progress.js';
-import { EvalRecentResults, type EvalResult } from './eval-recent-results.js';
-import { EvalStats } from './eval-stats.js';
+import { theme } from '@/interface/theme.js';
+import { EvalCurrentQuestion } from '@/evals/components/eval-current-question.js';
+import { EvalProgress } from '@/evals/components/eval-progress.js';
+import { EvalRecentResults, type EvalResult } from '@/evals/components/eval-recent-results.js';
+import { EvalStats } from '@/evals/components/eval-stats.js';
 
 const SHOW_STATS = true;
 

@@ -4,15 +4,15 @@
   "description": "Sentinel AI — Autonomous financial intelligence platform for deep market research.",
   "author": "Rajkaran Yadav",
   "type": "module",
-  "main": "src/index.tsx",
+  "main": "src/interface/index.tsx",
   "bin": {
-    "sentinel": "./src/index.tsx"
+    "sentinel": "./src/interface/index.tsx"
   },
   "scripts": {
-    "start": "bun run src/index.tsx",
-    "dev": "bun --watch run src/index.tsx",
-    "gateway": "tsx src/gateway/index.ts run",
-    "gateway:login": "tsx src/gateway/index.ts login",
+    "start": "bun run src/interface/index.tsx",
+    "dev": "bun --watch run src/interface/index.tsx",
+    "gateway": "tsx src/services/gateway/index.ts run",
+    "gateway:login": "tsx src/services/gateway/index.ts login",
     "typecheck": "tsc --noEmit",
     "test": "bun test",
     "test:watch": "bun test --watch",
