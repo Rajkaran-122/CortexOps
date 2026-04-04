@@ -1,28 +1,30 @@
 # WhatsApp Gateway
 
-Chat with Dexter through WhatsApp by linking your phone to the gateway. Messages you send to yourself (self-chat) are processed by Dexter and responses are sent back to the same chat.
+Chat with Sentinel through WhatsApp by linking your phone to the gateway. Messages you send to yourself (self-chat) are processed by Sentinel and responses are sent back to the same chat.
 
-## Table of Contents
+## Overview
 
-- [✅ Prerequisites](#-prerequisites)
-- [🔗 How to Link WhatsApp](#-how-to-link-whatsapp)
-- [🚀 How to Run](#-how-to-run)
-- [💬 How to Chat](#-how-to-chat)
-- [⚙️ Configuration](#️-configuration)
-- [👥 Group Chat](#-group-chat)
-- [🔄 How to Relink](#-how-to-relink)
-- [🐛 Troubleshooting](#-troubleshooting)
-- [🔧 Full Reset](#-full-reset)
+```
+WhatsApp ──→ Gateway ──→ Sentinel Agent ──→ Response ──→ WhatsApp
+```
 
-## ✅ Prerequisites
+The gateway connects to WhatsApp Web using [Baileys](https://github.com/WhiskeySockets/Baileys), processes incoming messages through the Sentinel agent, and sends responses back. It supports:
 
-- Dexter installed and working (see main [README](../../../../README.md))
-- WhatsApp installed on your phone
-- Your phone connected to the internet
+- **Self-chat mode**: Message yourself to interact with Sentinel
+- **Bot phone mode**: Dedicated phone number that others can message
+- **Group chat support**: Responds to @-mentions in group chats
 
-## 🔗 How to Link WhatsApp
+## Prerequisites
 
-Link your WhatsApp account to Dexter by scanning a QR code:
+- Sentinel installed and working (see main [README](../../../../README.md))
+- A WhatsApp account with phone number
+- The phone must stay connected to the internet
+
+## Setup
+
+### 1. Link WhatsApp
+
+Link your WhatsApp account to Sentinel by scanning a QR code:
 
 ```bash
 bun run gateway:login
@@ -30,205 +32,182 @@ bun run gateway:login
 
 This will:
 1. Display a QR code in your terminal
-2. Open WhatsApp on your phone
-3. Go to **Settings > Linked Devices > Link a Device**
-4. Scan the QR code
+2. Open WhatsApp on your phone → Settings → Linked Devices → Link a Device
+3. Scan the QR code
 
-After linking, you'll be asked how you want to use Dexter:
+After linking, you'll be asked how you want to use Sentinel:
 
-### Option 1: Self-chat (personal phone)
+#### Option 1: Self-chat mode (recommended for personal use)
 
-Use your own WhatsApp to talk to Dexter by messaging yourself. The linked phone number is added to `allowFrom` and self-chat mode is activated automatically.
+Use your own WhatsApp to talk to Sentinel by messaging yourself. The linked phone number is added to `allowFrom` and self-chat mode is activated automatically.
 
-### Option 2: Dedicated bot phone
+#### Option 2: Bot phone mode
 
-If Dexter has its own phone number (e.g. a separate SIM), choose this option and enter the phone number(s) allowed to message it. The gateway will be configured with `dmPolicy: "allowlist"` so other people can DM the bot.
+If Sentinel has its own phone number (e.g. a separate SIM), choose this option and enter the phone number(s) allowed to message it. The gateway will be configured with `dmPolicy: "allowlist"` so other people can DM the bot.
 
-Credentials are saved to `.dexter/credentials/whatsapp/default/`.
+Credentials are saved to `.sentinel/credentials/whatsapp/default/`.
 
-## 🚀 How to Run
-
-Start the gateway to begin receiving messages:
+### 2. Start the Gateway
 
 ```bash
 bun run gateway
 ```
 
-You should see:
+Output:
 ```
-[whatsapp] Connected
-Dexter gateway running. Press Ctrl+C to stop.
+Sentinel gateway running. Press Ctrl+C to stop.
 ```
 
-The gateway will now listen for incoming WhatsApp messages and respond using Dexter.
+The gateway will now listen for incoming WhatsApp messages and respond using Sentinel.
 
-## 💬 How to Chat
+## Usage
 
-Once the gateway is running:
+### Sending Messages
 
 1. Open WhatsApp on your phone
-2. Go to your own chat (message yourself)
-3. Send a message like "What is Apple's revenue?"
-4. You'll see a typing indicator while Dexter processes
-5. Dexter's response will appear in the chat
+2. Go to your own chat (self-chat) or message the bot number
+3. Type a financial question (e.g., "What's AAPL's revenue trend?")
+4. You'll see a typing indicator while Sentinel processes
+5. Sentinel's response will appear in the chat
 
-**Example conversation:**
+Example:
 ```
-You: What was NVIDIA's revenue in 2024?
-Dexter: NVIDIA's revenue for fiscal year 2024 was $60.9 billion...
+You: What was NVIDIA's revenue last year?
+Sentinel: NVIDIA's revenue for fiscal year 2024 was $60.9 billion...
 ```
 
-## ⚙️ Configuration
+## Configuration
 
-The gateway configuration is stored at `.dexter/gateway.json`. It's auto-created when you run `gateway:login`.
+The gateway configuration is stored at `.sentinel/gateway.json`. It's auto-created when you run `gateway:login`.
 
-**Self-chat configuration** (personal phone, message yourself):
+### Example Configurations
+
+**Self-chat configuration** (default after login):
+
 ```json
 {
   "gateway": {
-    "accountId": "default",
-    "logLevel": "info"
+    "accountId": "default"
   },
   "channels": {
     "whatsapp": {
-      "enabled": true,
-      "allowFrom": ["+1234567890"]
-    }
-  },
-  "bindings": []
-}
-```
-
-**Bot phone configuration** (dedicated Dexter phone, others message it):
-```json
-{
-  "gateway": {
-    "accountId": "default",
-    "logLevel": "info"
-  },
-  "channels": {
-    "whatsapp": {
-      "enabled": true,
-      "accounts": {
-        "default": {
-          "dmPolicy": "allowlist",
-          "allowFrom": ["+1555YOURNUM"],
-          "groupPolicy": "disabled",
-          "groupAllowFrom": []
-        }
-      },
-      "allowFrom": ["+1555YOURNUM"]
-    }
-  },
-  "bindings": []
-}
-```
-
-**Key settings:**
-
-| Setting | Description |
-|---------|-------------|
-| `channels.whatsapp.allowFrom` | Phone numbers allowed to message Dexter (E.164 format) |
-| `channels.whatsapp.enabled` | Enable/disable the WhatsApp channel |
-| `accounts.<id>.dmPolicy` | DM access policy: `pairing` (default), `allowlist`, `open`, or `disabled` |
-| `accounts.<id>.allowFrom` | Per-account allowed senders (overrides top-level `allowFrom`) |
-| `gateway.logLevel` | Log verbosity: `silent`, `error`, `info`, `debug` |
-
-## 👥 Group Chat
-
-Dexter can participate in WhatsApp group chats, responding only when @-mentioned.
-
-### Setup
-
-Add group policy to your account in `.dexter/gateway.json`:
-
-```jsonc
-{
-  "channels": {
-    "whatsapp": {
-      "enabled": true,
-      "accounts": {
-        "default": {
-          "groupPolicy": "open",       // "open", "allowlist", or "disabled"
-          "groupAllowFrom": ["*"]       // no need to list individual group members
-        }
-      },
-      "allowFrom": ["+1234567890"]      // existing DM allowlist (unrelated to groups)
+      "allowFrom": ["+15551234567"],
+      "accounts": {}
     }
   }
 }
 ```
 
-| Setting | Description |
-|---------|-------------|
-| `groupPolicy` | `"open"` (any group), `"allowlist"` (restricted), or `"disabled"` (default) |
-| `groupAllowFrom` | Which groups Dexter can participate in (`["*"]` for any) |
+**Bot phone configuration** (dedicated Sentinel phone, others message it):
 
-You don't need to list individual group members — when `groupPolicy` is `"open"`, Dexter will respond to @-mentions from anyone in any group it's added to.
+```json
+{
+  "gateway": {
+    "accountId": "default"
+  },
+  "channels": {
+    "whatsapp": {
+      "allowFrom": ["+15551234567", "+15559876543"],
+      "accounts": {
+        "default": {
+          "enabled": true,
+          "dmPolicy": "allowlist",
+          "allowFrom": ["+15551234567", "+15559876543"],
+          "groupPolicy": "disabled",
+          "groupAllowFrom": [],
+          "sendReadReceipts": true
+        }
+      }
+    }
+  }
+}
+```
 
-### Usage
+### Configuration Options
 
-1. Add Dexter's WhatsApp number to a group
-2. Send messages normally — Dexter stays silent
-3. @-mention Dexter (tap `@` and select from the picker) to get a response
-4. Dexter sees recent group messages for context, so it can follow the conversation
+| Field | Description |
+|-------|-------------|
+| `gateway.accountId` | Which WhatsApp account to use (default: `"default"`) |
+| `channels.whatsapp.allowFrom` | Phone numbers allowed to message Sentinel (E.164 format) |
+| `channels.whatsapp.accounts.*.dmPolicy` | DM policy: `"allowlist"` or `"open"` |
+| `channels.whatsapp.accounts.*.sendReadReceipts` | Whether to send read receipts |
 
-**Note:** You must use WhatsApp's @-mention picker (tap `@` then select the contact) — typing a phone number manually won't trigger a response.
+## Group Chat Support
 
-## 🔄 How to Relink
+Sentinel can participate in WhatsApp group chats, responding only when @-mentioned.
 
-If you need to relink your WhatsApp (e.g., after logging out or switching phones):
+### Enabling Groups
 
-1. Stop the gateway (Ctrl+C)
-2. Delete the credentials:
+Add group policy to your account in `.sentinel/gateway.json`:
+
+```json
+{
+  "channels": {
+    "whatsapp": {
+      "accounts": {
+        "default": {
+          "enabled": true,
+          "dmPolicy": "allowlist",
+          "allowFrom": ["+15551234567"],
+          "groupPolicy": "open",
+          "groupAllowFrom": ["*"],
+          "sendReadReceipts": true
+        }
+      }
+    }
+  }
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `groupPolicy` | Group interaction policy: `"disabled"` (default), `"open"` (respond to @-mentions) |
+| `groupAllowFrom` | Which groups Sentinel can participate in (`["*"]` for any) |
+
+You don't need to list individual group members — when `groupPolicy` is `"open"`, Sentinel will respond to @-mentions from anyone in any group it's added to.
+
+### How Group Chat Works
+
+1. Add Sentinel's WhatsApp number to a group
+2. Send messages normally — Sentinel stays silent
+3. @-mention Sentinel (tap `@` and select from the picker) to get a response
+4. Sentinel sees recent group messages for context, so it can follow the conversation
+
+## Troubleshooting
+
+### QR Code Not Appearing
+
+- Make sure you have a working internet connection
+- Try running `bun run gateway:login` again
+- Delete old credentials:
+  ```bash
+  rm -rf .sentinel/credentials/whatsapp/default
+  ```
+
+### Messages Not Being Processed
+
+- Make sure the gateway is running (`bun run gateway`)
+- Verify your phone number is in `allowFrom` in `.sentinel/gateway.json`
+- Check that the phone format is E.164 (e.g., `+15551234567`)
+
+### Gateway Crashes
+
+- Check `.sentinel/gateway-debug.log` for detailed logs
+- Ensure your WhatsApp session is still linked
+- Restart the gateway
+
+### Relinking WhatsApp
+
+If you need to relink:
+
+1. On your phone:
+   - Open WhatsApp → Settings → Linked Devices
+   - Tap on the Sentinel device and select **Log Out**
+
+2. Delete local credentials and relink:
    ```bash
-   rm -rf .dexter/credentials/whatsapp/default
-   ```
-3. Run login again:
-   ```bash
+   rm -rf .sentinel/credentials/whatsapp/default
+   rm -rf .sentinel/gateway.json
+   rm -rf .sentinel/gateway-debug.log
    bun run gateway:login
    ```
-4. Scan the new QR code
-
-## 🐛 Troubleshooting
-
-**Gateway shows "Disconnected":**
-- Check your internet connection
-- Try relinking (see above)
-
-**Messages not being received:**
-- Verify your phone number is in `allowFrom` in `.dexter/gateway.json`
-- Make sure you're messaging yourself (self-chat mode)
-
-**Debug logs:**
-- Check `.dexter/gateway-debug.log` for detailed logs
-
-## 🔧 Full Reset
-
-If you're experiencing persistent issues (connection problems, encryption errors, messages not sending), perform a full reset:
-
-1. **Stop the gateway** (Ctrl+C if running)
-
-2. **Unlink from WhatsApp:**
-   - Open WhatsApp on your phone
-   - Go to **Settings > Linked Devices**
-   - Tap on the Dexter device and select **Log Out**
-
-3. **Clear all local data:**
-   ```bash
-   rm -rf .dexter/credentials/whatsapp/default
-   rm -rf .dexter/gateway.json
-   rm -rf .dexter/gateway-debug.log
-   ```
-
-4. **Relink and start fresh:**
-   ```bash
-   bun run gateway:login
-   ```
-
-5. **Scan the QR code** and start the gateway:
-   ```bash
-   bun run gateway
-   ```
-
-This clears all cached credentials and encryption sessions, which resolves most connection issues.

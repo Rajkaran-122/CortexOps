@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Release script for Dexter
+# Release script for Sentinel AI
 # Usage: bash scripts/release.sh [version]
 # If no version is provided, defaults to today's date as YYYY.M.D
 
@@ -99,8 +99,8 @@ git push origin "$TAG"
 
 # Create GitHub release
 echo -e "$BODY" | gh release create "$TAG" \
-  --title "Dexter ${VERSION}" \
+  --title "Sentinel AI ${VERSION}" \
   --notes-file -
 
 echo ""
-echo "Released ${TAG}: https://github.com/digitalmetro/dexter/releases/tag/${TAG}"
+echo "Released ${TAG}: https://github.com/<your-username>/sentinel-ai/releases/tag/${TAG}"

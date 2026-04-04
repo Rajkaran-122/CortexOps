@@ -306,7 +306,7 @@ export async function runCli() {
 
   const HELP_TEXT = `Keyboard Shortcuts
   esc          Interrupt query / clear input
-  ctrl+c       Exit Dexter
+  ctrl+c       Exit Sentinel
   /model       Switch LLM provider and model
   /rules       Show research rules
   /clear       Clear conversation
@@ -318,7 +318,7 @@ export async function runCli() {
         modelSelection.startSelection();
         break;
       case 'rules':
-        await agentRunner.runQuery('Show me my current research rules from .dexter/RULES.md');
+        await agentRunner.runQuery('Show me my current research rules from .sentinel/RULES.md');
         break;
       case 'clear':
         chatLog.clearAll();
@@ -328,7 +328,7 @@ export async function runCli() {
         await agentRunner.runQuery('Show me what you know about me from memory. Use memory_search and memory_get.');
         break;
       case 'heartbeat':
-        await agentRunner.runQuery('Show me my current heartbeat checklist from .dexter/HEARTBEAT.md');
+        await agentRunner.runQuery('Show me my current heartbeat checklist from .sentinel/HEARTBEAT.md');
         break;
       case 'history': {
         const messages = modelSelection.inMemoryChatHistory.getMessages();
