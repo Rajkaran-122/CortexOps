@@ -15,6 +15,36 @@ Sentinel AI is a CLI-based agent that conducts real-time financial research usin
 - **Scheduled Monitoring** — Heartbeat system for periodic market checks and alerts
 - **Rich Terminal UI** — Interactive CLI with formatted tables, syntax highlighting, and real-time streaming
 
+---
+## Architecture
+
+```
+src/
+├── agent/          # Core reasoning loop, system prompts, context management
+├── tools/          # Financial search, web research, browser, filesystem
+├── components/     # Terminal UI widgets (Ink/pi-tui)
+├── commands/       # Slash command definitions
+├── memory/         # Persistent semantic memory system
+├── skills/         # Extensible SKILL.md workflows
+├── gateway/        # WhatsApp messaging integration
+├── cron/           # Scheduled job execution
+├── model/          # Multi-provider LLM abstraction
+└── utils/          # Configuration, caching, token management
+```
+
+---
+## Architecture Diagram
+---
+<img width="7523" height="4446" alt="image" src="https://github.com/user-attachments/assets/da2656f6-303c-4017-be6c-5d5da5bb4060" />
+
+---
+## data flow Diagram
+---
+<img width="8192" height="4495" alt="image" src="https://github.com/user-attachments/assets/e63fa05b-23cb-44df-a834-be3c364701a8" />
+
+
+---
+
 ## Quick Start
 
 ### Prerequisites
@@ -80,34 +110,9 @@ Copy `env.example` to `.env` and configure:
 
 Persistent settings are stored in `.sentinel/settings.json` (auto-created). Use `/model` to switch providers interactively.
 
-## Architecture
-
-```
-src/
-├── agent/          # Core reasoning loop, system prompts, context management
-├── tools/          # Financial search, web research, browser, filesystem
-├── components/     # Terminal UI widgets (Ink/pi-tui)
-├── commands/       # Slash command definitions
-├── memory/         # Persistent semantic memory system
-├── skills/         # Extensible SKILL.md workflows
-├── gateway/        # WhatsApp messaging integration
-├── cron/           # Scheduled job execution
-├── model/          # Multi-provider LLM abstraction
-└── utils/          # Configuration, caching, token management
-```
 
 ---
-## Architecture Diagram
----
-<img width="7523" height="4446" alt="image" src="https://github.com/user-attachments/assets/da2656f6-303c-4017-be6c-5d5da5bb4060" />
 
----
-## data flow Diagram
----
-<img width="8192" height="4495" alt="image" src="https://github.com/user-attachments/assets/e63fa05b-23cb-44df-a834-be3c364701a8" />
-
-
----
 ## Development
 
 ```bash
