@@ -2,13 +2,13 @@ import { buildSnippet } from '@/core/memory/chunker.js';
 import { embedSingleQuery } from '@/core/memory/embeddings.js';
 import { applyTemporalDecay } from '@/core/memory/temporal-decay.js';
 import { applyMMRToHybridResults } from '@/core/memory/mmr.js';
-import type { MemoryDatabase } from '@/core/memory/database.js';
 import type {
   MemoryEmbeddingClient,
   MemorySearchOptions,
   MemorySearchResult,
   TemporalDecayConfig,
   MMRConfig,
+  IMemoryDatabase,
 } from '@/core/memory/types.js';
 
 type CombinedScore = {
@@ -29,7 +29,7 @@ function normalizeWeights(vectorWeight: number, textWeight: number): { vector: n
 }
 
 export async function hybridSearch(params: {
-  db: MemoryDatabase;
+  db: IMemoryDatabase;
   embeddingClient: MemoryEmbeddingClient | null;
   query: string;
   options?: MemorySearchOptions;
@@ -47,8 +47,8 @@ export async function hybridSearch(params: {
   const candidateCount = maxResults * 4;
 
   const queryEmbedding = await embedSingleQuery(params.embeddingClient, params.query);
-  const vectorCandidates = queryEmbedding ? params.db.searchVector(queryEmbedding, candidateCount) : [];
-  const keywordCandidates = params.db.searchKeyword(params.query, candidateCount);
+  const vectorCandidates = queryEmbedding ? await params.db.searchVector(queryEmbedding, candidateCount) : [];
+  const keywordCandidates = await params.db.searchKeyword(params.query, candidateCount);
 
   // When a search path is unavailable (no embedding client → no vector results),
   // give full weight to the path that did run so scores aren't artificially suppressed.
@@ -94,7 +94,7 @@ export async function hybridSearch(params: {
   // Stage 2: Load full details for all candidates (needed for decay + MMR).
   // We load more than maxResults because decay and MMR will re-rank them.
   const ids = merged.map((entry) => entry.id);
-  const details = params.db.loadResultsByIds(ids);
+  const details = await params.db.loadResultsByIds(ids);
   const byId = new Map<number, MemorySearchResult>();
   for (const [index, detail] of details.entries()) {
     const id = ids[index];

@@ -5,6 +5,8 @@ import type {
   MemoryKeywordCandidate,
   MemorySearchResult,
   MemoryVectorCandidate,
+  MemoryChunkRow,
+  IMemoryDatabase,
 } from '@/core/memory/types.js';
 
 type SqliteQuery<T> = {
@@ -19,17 +21,7 @@ type SqliteDatabase = {
   close(): void;
 };
 
-type ChunkRow = {
-  id: number;
-  file_path: string;
-  start_line: number;
-  end_line: number;
-  content: string;
-  content_hash: string;
-  embedding: Uint8Array | null;
-  source: string;
-  updated_at: number;
-};
+
 
 type CacheRow = {
   embedding: Uint8Array;
@@ -113,7 +105,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
   return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
-export class MemoryDatabase {
+export class MemoryDatabase implements IMemoryDatabase {
   private constructor(private readonly db: SqliteDatabase) {}
 
   static async create(path: string): Promise<MemoryDatabase> {
@@ -207,9 +199,9 @@ export class MemoryDatabase {
       .run(params.contentHash, toBlob(params.embedding), params.provider, params.model, Date.now());
   }
 
-  getChunkByHash(contentHash: string): ChunkRow | null {
+  getChunkByHash(contentHash: string): MemoryChunkRow | null {
     return this.db
-      .query<ChunkRow>(
+      .query<MemoryChunkRow>(
         'SELECT id, file_path, start_line, end_line, content, content_hash, embedding FROM chunks WHERE content_hash = ?',
       )
       .get(contentHash);
@@ -288,9 +280,9 @@ export class MemoryDatabase {
     return rows.map((row) => row.file_path);
   }
 
-  listAllChunks(): ChunkRow[] {
+  listAllChunks(): MemoryChunkRow[] {
     return this.db
-      .query<ChunkRow>(
+      .query<MemoryChunkRow>(
         'SELECT id, file_path, start_line, end_line, content, content_hash, embedding FROM chunks ORDER BY id ASC',
       )
       .all();
@@ -338,14 +330,14 @@ export class MemoryDatabase {
     }
     const placeholders = ids.map(() => '?').join(', ');
     const rows = this.db
-      .query<ChunkRow>(
+      .query<MemoryChunkRow>(
         `SELECT id, file_path, start_line, end_line, content, content_hash, embedding, source, updated_at FROM chunks WHERE id IN (${placeholders})`,
       )
       .all(...ids);
     const rowById = new Map(rows.map((row) => [row.id, row]));
     return ids
       .map((id) => rowById.get(id))
-      .filter((row): row is ChunkRow => Boolean(row))
+      .filter((row): row is MemoryChunkRow => Boolean(row))
       .map((row) => ({
         snippet: row.content,
         path: row.file_path,

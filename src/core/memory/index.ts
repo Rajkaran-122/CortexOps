@@ -12,7 +12,9 @@ import type {
   MemorySessionContext,
   TemporalDecayConfig,
   MMRConfig,
+  IMemoryDatabase,
 } from '@/core/memory/types.js';
+import { PostgresDatabase } from '@/core/memory/postgres-database.js';
 import { getSetting } from '@/common/utils/config.js';
 
 const DEFAULT_CONFIG: MemoryRuntimeConfig = {
@@ -65,7 +67,7 @@ export class MemoryManager {
   }
 
   private readonly store = new MemoryStore();
-  private db: MemoryDatabase | null = null;
+  private db: IMemoryDatabase | null = null;
   private indexer: MemoryIndexer | null = null;
   private initError: string | null = null;
 
@@ -86,11 +88,17 @@ export class MemoryManager {
     });
 
     try {
-      this.db = await MemoryDatabase.create(`${this.store.getMemoryDir()}/index.sqlite`);
+      const backend = process.env.MEMORY_BACKEND === 'postgres' ? 'postgres' : 'sqlite';
+      if (backend === 'postgres' && process.env.DATABASE_URL) {
+        this.db = await PostgresDatabase.create(process.env.DATABASE_URL);
+      } else {
+        this.db = await MemoryDatabase.create(`${this.store.getMemoryDir()}/index.sqlite`);
+      }
+
       const fingerprint = client ? `${client.provider}:${client.model}` : 'none:none';
-      if (this.db.getProviderFingerprint() !== fingerprint) {
-        this.db.clearEmbeddings();
-        this.db.setProviderFingerprint(fingerprint);
+      if ((await this.db.getProviderFingerprint()) !== fingerprint) {
+        await this.db.clearEmbeddings();
+        await this.db.setProviderFingerprint(fingerprint);
       }
 
       this.indexer = new MemoryIndexer(this.store, this.db, {

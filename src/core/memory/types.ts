@@ -95,3 +95,43 @@ export interface MemoryEmbeddingClient {
   dimensions?: number;
   embed(texts: string[]): Promise<number[][]>;
 }
+
+export interface MemoryChunkRow {
+  id: number;
+  file_path: string;
+  start_line: number;
+  end_line: number;
+  content: string;
+  content_hash: string;
+  embedding: any | null;
+  source: string;
+  updated_at: number;
+}
+
+export interface IMemoryDatabase {
+  close(): Promise<void> | void;
+  getProviderFingerprint(): Promise<string | null> | string | null;
+  setProviderFingerprint(value: string): Promise<void> | void;
+  clearEmbeddings(): Promise<void> | void;
+  getCachedEmbedding(contentHash: string): Promise<number[] | null> | number[] | null;
+  setCachedEmbedding(params: {
+    contentHash: string;
+    embedding: number[];
+    provider: string;
+    model: string;
+  }): Promise<void> | void;
+  getChunkByHash(contentHash: string): Promise<MemoryChunkRow | null> | MemoryChunkRow | null;
+  upsertChunk(params: {
+    chunk: MemoryChunk;
+    embedding: number[] | null;
+    provider?: string;
+    model?: string;
+    source?: string;
+  }): Promise<{ id: number; inserted: boolean }> | { id: number; inserted: boolean };
+  deleteChunksForFile(filePath: string): Promise<number> | number;
+  listIndexedFiles(): Promise<string[]> | string[];
+  listAllChunks(): Promise<MemoryChunkRow[]> | MemoryChunkRow[];
+  searchVector(queryEmbedding: number[], maxResults: number): Promise<MemoryVectorCandidate[]> | MemoryVectorCandidate[];
+  searchKeyword(query: string, maxResults: number): Promise<MemoryKeywordCandidate[]> | MemoryKeywordCandidate[];
+  loadResultsByIds(ids: number[]): Promise<MemorySearchResult[]> | MemorySearchResult[];
+}

@@ -1,9 +1,8 @@
 import { watch, type FSWatcher } from 'node:fs';
 import { dirname } from 'node:path';
-import type { MemoryDatabase } from '@/core/memory/database.js';
 import { chunkMemoryText } from '@/core/memory/chunker.js';
 import { parseSessionTranscripts } from '@/core/memory/session-files.js';
-import type { MemoryEmbeddingClient, MemorySyncStats } from '@/core/memory/types.js';
+import type { MemoryEmbeddingClient, MemorySyncStats, IMemoryDatabase } from '@/core/memory/types.js';
 import { MemoryStore } from '@/core/memory/store.js';
 
 const SESSION_FILE_PATH = 'sessions/chat_history.json';
@@ -17,7 +16,7 @@ export class MemoryIndexer {
 
   constructor(
     private readonly store: MemoryStore,
-    private readonly db: MemoryDatabase,
+    private readonly db: IMemoryDatabase,
     private readonly options: {
       chunkTokens: number;
       overlapTokens: number;
@@ -101,7 +100,7 @@ export class MemoryIndexer {
     await this.store.ensureDirectoryExists();
 
     const files = await this.store.listMemoryFiles();
-    const indexedFilesBefore = new Set(this.db.listIndexedFiles());
+    const indexedFilesBefore = new Set(await this.db.listIndexedFiles());
     let removedChunks = 0;
     for (const knownFile of indexedFilesBefore) {
       // Don't remove session file entries during memory file cleanup.
@@ -109,7 +108,7 @@ export class MemoryIndexer {
         continue;
       }
       if (!files.includes(knownFile)) {
-        removedChunks += this.db.deleteChunksForFile(knownFile);
+        removedChunks += await this.db.deleteChunksForFile(knownFile);
       }
     }
 
@@ -126,7 +125,7 @@ export class MemoryIndexer {
       });
 
       if (options?.force) {
-        removedChunks += this.db.deleteChunksForFile(file);
+        removedChunks += await this.db.deleteChunksForFile(file);
       }
 
       const result = await this.embedAndUpsertChunks(chunks, 'memory');
@@ -135,7 +134,7 @@ export class MemoryIndexer {
 
       // Ensure removed files do not linger if a file was truncated to empty.
       if (chunks.length === 0) {
-        removedChunks += this.db.deleteChunksForFile(file);
+        removedChunks += await this.db.deleteChunksForFile(file);
       }
     }
 
@@ -163,7 +162,7 @@ export class MemoryIndexer {
     const entries = await parseSessionTranscripts(chatHistoryPath);
 
     if (entries.length === 0) {
-      const removed = this.db.deleteChunksForFile(SESSION_FILE_PATH);
+      const removed = await this.db.deleteChunksForFile(SESSION_FILE_PATH);
       return { indexed: 0, updated: 0, removed };
     }
 
@@ -183,13 +182,13 @@ export class MemoryIndexer {
 
     let removed = 0;
     if (force) {
-      removed = this.db.deleteChunksForFile(SESSION_FILE_PATH);
+      removed = await this.db.deleteChunksForFile(SESSION_FILE_PATH);
     }
 
     const result = await this.embedAndUpsertChunks(chunks, 'sessions');
 
     if (chunks.length === 0) {
-      removed += this.db.deleteChunksForFile(SESSION_FILE_PATH);
+      removed += await this.db.deleteChunksForFile(SESSION_FILE_PATH);
     }
 
     return { indexed: result.indexed, updated: result.updated, removed };
@@ -199,7 +198,12 @@ export class MemoryIndexer {
     chunks: { filePath: string; startLine: number; endLine: number; content: string; contentHash: string }[],
     source: 'memory' | 'sessions',
   ): Promise<{ indexed: number; updated: number }> {
-    const uncached = chunks.filter((chunk) => !this.db.getCachedEmbedding(chunk.contentHash));
+    const uncached = [];
+    for (const chunk of chunks) {
+      if (!(await this.db.getCachedEmbedding(chunk.contentHash))) {
+        uncached.push(chunk);
+      }
+    }
     let uncachedVectors: number[][] = [];
     if (uncached.length > 0 && this.options.embeddingClient) {
       uncachedVectors = await this.options.embeddingClient.embed(uncached.map((chunk) => chunk.content));
@@ -213,7 +217,7 @@ export class MemoryIndexer {
         continue;
       }
       uncachedMap.set(chunk.contentHash, vector);
-      this.db.setCachedEmbedding({
+      await this.db.setCachedEmbedding({
         contentHash: chunk.contentHash,
         embedding: vector,
         provider: this.options.embeddingClient?.provider ?? 'none',
@@ -225,9 +229,9 @@ export class MemoryIndexer {
     let updated = 0;
 
     for (const chunk of chunks) {
-      const cached = this.db.getCachedEmbedding(chunk.contentHash);
+      const cached = await this.db.getCachedEmbedding(chunk.contentHash);
       const embedding = cached ?? uncachedMap.get(chunk.contentHash) ?? null;
-      const result = this.db.upsertChunk({
+      const result = await this.db.upsertChunk({
         chunk,
         embedding,
         provider: this.options.embeddingClient?.provider,
