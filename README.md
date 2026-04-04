@@ -96,6 +96,18 @@ src/
 └── utils/          # Configuration, caching, token management
 ```
 
+---
+## Architecture Diagram
+---
+<img width="7523" height="4446" alt="image" src="https://github.com/user-attachments/assets/da2656f6-303c-4017-be6c-5d5da5bb4060" />
+
+---
+## data flow Diagram
+---
+<img width="8192" height="4495" alt="image" src="https://github.com/user-attachments/assets/e63fa05b-23cb-44df-a834-be3c364701a8" />
+
+
+---
 ## Development
 
 ```bash
