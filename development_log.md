@@ -208,3 +208,4 @@
 - [2026-04-10T18:00:00.000Z] Update filing reader for 10-K parsing
 - [2026-04-20T09:00:00.000Z] Add support for more LLM providers
 - [2026-04-12T20:00:00.000Z] Fix edge case in token limit calculation
+- [2026-04-06T19:00:00.000Z] Refactor CLI input validation
