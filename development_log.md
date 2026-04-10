@@ -205,3 +205,4 @@
 - [2026-04-04T13:00:00.000Z] Add benchmarking scripts for agent speed
 - [2026-04-13T09:00:00.000Z] Add unit tests for market data tools
 - [2026-04-03T12:00:00.000Z] Improve error handling for API timeouts
+- [2026-04-10T18:00:00.000Z] Update filing reader for 10-K parsing
