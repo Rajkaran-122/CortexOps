@@ -203,3 +203,4 @@
 - [2026-04-06T10:00:00.000Z] Improve model selection logic
 - [2026-04-14T14:00:00.000Z] Update dependencies for security fixes
 - [2026-04-04T13:00:00.000Z] Add benchmarking scripts for agent speed
+- [2026-04-13T09:00:00.000Z] Add unit tests for market data tools
