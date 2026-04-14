@@ -201,3 +201,4 @@
 - [2025-12-03T12:00:00.000Z] Improve CLI dashboard responsiveness
 - [2025-12-01T12:00:00.000Z] Fix bug in ticker search results
 - [2026-04-06T10:00:00.000Z] Improve model selection logic
+- [2026-04-14T14:00:00.000Z] Update dependencies for security fixes
